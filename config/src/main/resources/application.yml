@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/你的个人路径/sp-config        # 最后的sp-config不用写!
+          searchPaths: config
+          #username: your-username
+          #password: your-password
+
+server:
+  port: 6001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka

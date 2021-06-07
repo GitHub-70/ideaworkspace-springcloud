@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: local-1
+
+# 用户自定义属性
+sp:
+  user-service:
+    users: "[{\"id\":7, \"username\":\"abc\",\"password\":\"123\"},{\"id\":8, \"username\":\"def\",\"password\":\"456\"},{\"id\":9, \"username\":\"ghi\",\"password\":\"789\"}]"
+---
+
+spring:
+  application:
+    name: user-server1
+  profiles: local-1
+
+server:
+  port: 8101
+
+
+eureka:
+  client:
+    service-url:
+      # 每个服务单元向注册中心 eureka-1:2001 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka #defaultZone 表示服务器的部署位置
+
+---
+spring:
+  application:
+    name: user-server2
+  profiles: local-2
+
+server:
+  port: 8102
+
+
+eureka:
+  client:
+    service-url:
+      # 每个服务单元向注册中心 eureka-1:2001 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka #defaultZone 表示服务器的部署位置

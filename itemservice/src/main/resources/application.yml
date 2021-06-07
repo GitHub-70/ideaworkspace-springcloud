@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: item-server
+
+
+server:
+  port: 8001
+
+logging:
+  level:
+    com.tansun: debug
+
+
+# 配置启动参数：--spring.profiles.active=主机名（item-server2）
+---
+spring:
+  profiles: item-server2
+
+
+server:
+  port: 8002
+
+eureka:
+  client:
+    service-url:
+      # 每个服务两个单元向注册中心 eureka-1:2001与 eureka-2:2002 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka,http://eureka-2:2002/eureka #defaultZone 表示服务器的部署位置
+
+---
+spring:
+  profiles: item-server3
+
+
+server:
+  port: 8003
+
+eureka:
+  client:
+    service-url:
+      # 每个服务两个单元向注册中心 eureka-1:2001与 eureka-2:2002 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka,http://eureka-2:2002/eureka #defaultZone 表示服务器的部署位置
+

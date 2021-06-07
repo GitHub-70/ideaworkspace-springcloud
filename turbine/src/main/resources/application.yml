@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: turbine
+
+server:
+  port: 5001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+turbine:
+#  app-config: order-server, feign
+  app-config: order-server, zuul
+  cluster-name-expression: new String("default")

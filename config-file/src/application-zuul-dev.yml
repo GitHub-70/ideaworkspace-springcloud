@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: zuul
+
+server:
+  port: 3004
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+zuul:
+#  默认路由：ip+port+服务名+mapping路径
+#  routes:
+#    # 路由的服务名
+#    # http://localhost:3004/item-server/3
+#    item-server: /**
+#    # http://localhost:3004/user-server1/3  todo server1
+#    user-server1: /**
+#    # http://localhost:3004/order-server/3
+#    order-server: /order-service22/**
+  # 开启重试
+  retryable: true
+#  # zuul 会过滤敏感 http 协议头，默认过滤以下协议头
+#  # Cookie、Set-Cookie、Authorization（如果客户端在发请求头带了Cookie，那么Cookie不会传递给下游服务。）
+#  # sensitive-headers:代表不过滤任何请求头
+#  sensitive-headers:
+
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 0
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # http://localhost:3004/actuator/hystrix.sream 监控端点信息 出现如下提示
+            # The Hystrix timeout of 2000ms for the command user-server1 is set lower than the combination of the Ribbon read and connect timeout, 4000ms.
+#            timeoutInMilliseconds: 2000
+            # ribbon读取超时 1秒 连接超时 1秒 可重试下一个实例 1 次 最长用时 4 秒
+            timeoutInMilliseconds: 4000
+
+# todo http://localhost:3004/actuator/hystrix.sream 访问不通
+# todo 但能通过 http://localhost:4001/hystrix 监控 监控端点 即上述url:http://localhost:3004/actuator/hystrix.sream
+# zuul 已经包含 actuator 依赖
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

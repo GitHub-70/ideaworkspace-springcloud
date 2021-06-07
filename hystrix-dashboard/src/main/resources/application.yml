@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: hystrix-dashboard
+
+server:
+  port: 4001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露的端点 health，info，hystrix.stream
+        # 通过http://localhost:3002/actuator  来展示所有通过HTTP暴露的endpoints。
+        # hystrix.stream 该端点信息，需要有 hystrix 依赖，以及启动 hystrix
+        include: health, info, hystrix.stream
+
+# Unable to connect to Command Metric Stream
+# 解决方式如下
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: localhost,127.0.0.1

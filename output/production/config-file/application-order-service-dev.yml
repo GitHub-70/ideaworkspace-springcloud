@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: order-server
+
+server:
+  port: 8201
+
+feign:
+  hystrix:
+    enabled: true
+
+# 暴露该服务的 hystrix.stream 端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+eureka:
+  client:
+    service-url:
+      # 每个服务单元向注册中心 eureka-1:2001 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka #defaultZone 表示服务器的部署位置
+
+
+# 配置启动参数：--spring.profiles.active=主机名（order-server2）
+---
+spring:
+  profiles: order-server2
+
+server:
+  port: 8202
+
+
+eureka:
+  client:
+    service-url:
+      # 每个服务单元向注册中心 eureka-1:2001 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka #defaultZone 表示服务器的部署位置
+
+---
+spring:
+  profiles: order-server3
+
+server:
+  port: 8203
+
+
+eureka:
+  client:
+    service-url:
+      # 每个服务单元向注册中心 eureka-1:2001 登记自己提供的服务
+      defaultZone: http://eureka-1:2001/eureka #defaultZone 表示服务器的部署位置
