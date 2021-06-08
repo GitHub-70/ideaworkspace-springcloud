@@ -6,8 +6,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/你的个人路径/sp-config        # 最后的sp-config不用写!
-          searchPaths: config
+          uri: https://github.com/GitHub-70/ideaworkspace-springcloud/
+          searchPaths: config-file/src
           #username: your-username
           #password: your-password
 

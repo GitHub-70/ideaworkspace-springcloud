@@ -45,12 +45,12 @@ item-server:
 #  metrics:
 #    # 启动 hystrix 熔断降级
 #    enabled: true
-#    polling-interval-ms: 500 #超时时间 默认10秒
+#    polling-interval-ms: 500 #时间间隔 默认10秒
 
 feign:
 #  metrics:
 #    enabled: true
-#  # 启动 hystrix 降级熔断
+  # 启动 hystrix 降级熔断
   # todo 只要第一次未请求数据成功，断点打开，直接走降级服务
   # @EnableCircuitBreaker只针对Hystrix 对Feign没用，所以必须在feign配置下启动hystrix
   hystrix:
