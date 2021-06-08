@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    config:
+      # 启动服务发现 通过服务发现找配置中心的文件
+      discovery:
+        enabled: true
+        # 该服务ID 是配置中心的 服务名称
+        service-id: config-server
+      # name指定想要从从配置中心加载的配置文件名，不用加后缀，获取多个则以逗号隔开
+      name: application-user-service
+      profile: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka

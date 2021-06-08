@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @RefreshScope 或
-     * @ConfigurationProperties
+     * @ConfigurationProperties 如果有前缀，则可以设置prefix=XXX
      * 动态刷新 配置信息
      */
     @Value("${sp.user-service.users}")
