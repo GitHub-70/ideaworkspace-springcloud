@@ -7,6 +7,7 @@ spring:
         # 该服务ID 是配置中心的 服务名称
         service-id: config-server
       # name指定想要从从配置中心加载的配置文件名，不用加后缀，获取多个则以逗号隔开
+      # http://localhost:6001/application-user-service/dev.yml 从配置中心 查看该文件name与控制台输出一致
       name: application-user-service
       profile: dev
 
@@ -14,3 +15,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+# 测试数据
+sp:
+  user-service:
+    users: "[{\"id\":7, \"username\":\"abc\",\"password\":\"123\"},{\"id\":8, \"username\":\"def\",\"password\":\"456\"},{\"id\":9, \"username\":\"ghi\",\"password\":\"78999\"}]"
