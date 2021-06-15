@@ -27,7 +27,7 @@ item-server:
     MaxAutoRetries: 0
     # 是否对所有操作都进行重试
     OkToRetryOnAllOperations: false
-  # hystrix的超时时间
+  # hystrix的超时时间 局部配置
   hystrix:
     command:
       default:
@@ -38,6 +38,17 @@ item-server:
             thread:
               timeoutInMilliseconds: 2000
 
+# hystrix的超时时间 全局配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+  # Unable to connect to Command Metric Stream.
+  dashboard:
+    proxy-stream-allow-list: localhost
 
 
 # todo 待研究
@@ -51,11 +62,12 @@ feign:
 #  metrics:
 #    enabled: true
   # 启动 hystrix 降级熔断
-  # todo 只要第一次未请求数据成功，断点打开，直接走降级服务
+  # 只要第一次未请求数据成功，断点打开，直接走降级服务
   # @EnableCircuitBreaker只针对Hystrix 对Feign没用，所以必须在feign配置下启动hystrix
   hystrix:
     enabled: true
 
+# todo hystrix.tream为无效配置，是否是版本问题
 management:
   endpoints:
     web:

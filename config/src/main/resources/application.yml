@@ -1,10 +1,36 @@
 spring:
   application:
     name: config-server
+  profiles:
+    active: git-repo
 
+  rabbitmq:
+    host: 192.168.189.130
+    port: 5672
+    username: guest
+    password: guest
+
+
+server:
+  port: 6001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
+---
 # 请求路径：http://localhost:6001/application-item-service-dev.yml
 # 请求路径：http://localhost:6001/application-item-service/dev.yml
 # 请求路径：http://localhost:6001/application-item-service/dev
+spring:
+  profiles: git-repo
   cloud:
     config:
       server:
@@ -17,11 +43,21 @@ spring:
 #          password: your-password  # git仓库的密码（公开仓库无需账号信息）
           # git默认分支
           default-label: master
+          # Spring云配置服务器强制拉取远程git存储库
+          force-pull: true
 
-server:
-  port: 6001
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+
+---
+#  可以把配置文件保存在配置中心服务的 resources 目录下，直接访问本地文件
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config

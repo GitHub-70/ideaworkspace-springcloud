@@ -50,7 +50,7 @@ hystrix:
 
 # todo http://localhost:3004/actuator/hystrix.sream 访问不通
 # todo 但能通过 http://localhost:4001/hystrix 监控 监控端点 即上述url:http://localhost:3004/actuator/hystrix.sream
-# todo zuul 已经包含 actuator 依赖
+# zuul 已经包含 actuator 依赖
 management:
   endpoints:
     web:

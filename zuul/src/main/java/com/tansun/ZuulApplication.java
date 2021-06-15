@@ -17,8 +17,8 @@ public class ZuulApplication {
 
     /**
      * todo 不知为何需要通过以下方式 才能暴露 hystrix.stream
-     * http://localhost:3003/actuator/ 暴露的端点中 没有显示 hystrix.stream信息
-     * 但却 能通过 http://localhost:3003/actuator/hystrix.stream 访问
+     * http://localhost:3004/actuator/ 暴露的端点中 没有显示 hystrix.stream信息
+     * 但却 能通过 http://localhost:3004/actuator/hystrix.stream 访问
      *
      * 据网上资料说，低版本可根据配置，可直接查看 hystrix.stream 信息
      * 高版本需要通过下面方法 才能查看hystrix.stream 信息
