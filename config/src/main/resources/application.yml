@@ -1,8 +1,8 @@
 spring:
   application:
     name: config-server
-  profiles:
-    active: git-repo
+#  profiles:
+#    active: git-repo
 
   rabbitmq:
     host: 192.168.189.130
@@ -49,6 +49,7 @@ spring:
 
 
 ---
+#  未指明具体生效配置，默认是该配置
 #  可以把配置文件保存在配置中心服务的 resources 目录下，直接访问本地文件
 spring:
   application:

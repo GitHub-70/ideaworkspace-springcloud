@@ -22,7 +22,7 @@ public class OrderServiceFallback implements FallbackProvider {
 
     @Override
     public String getRoute() {
-        //当执行item-service失败，
+        //当执行order-service失败，
         //应用当前这个降级类
         return "order-server";
         // 星号和null都表示所有微服务失败 都应用当前降级类

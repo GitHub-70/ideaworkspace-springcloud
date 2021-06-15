@@ -11,13 +11,26 @@ spring:
       name: application-zuul
       profile: dev
 
-#  rabbitmq:
-#    host: 192.168.189.130
-#    port: 5672
-#    username: guest
-#    password: guest
+  rabbitmq:
+    host: 192.168.189.130
+    port: 5672
+    username: guest
+    password: guest
+
+  # 启动 zipkin 时，连接到 rabbitmq
+  # java -jar zipkin.jar --zipkin.collector.rabbitmq.uri=amqp://admin:admin@192.168.189.130:5672
+  # sleuth 数据发送到 zipkin 服务地址
+  zipkin:
+    base-url: http://localhost:9411
+  # 链路的数据发送到 zipkin 的比例
+  sleuth:
+    sampler:
+      # 发送到 zipkin 的比例为0-1，1为100%
+      # [zuul,82ffa02bcae14121,82ffa02bcae14121,true] 对应 [服务id,链路id,span id,是否发送数据到zipkin]
+      probability: 1
 
 eureka:
   client:
     service-url:
       defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+

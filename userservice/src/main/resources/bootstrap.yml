@@ -17,6 +17,15 @@ spring:
     username: guest
     password: guest
 
+  # sleuth 数据发送到 zipkin 服务地址
+  zipkin:
+    base-url: http://192.168.189.130:9411
+  # 链路的数据发送到 zipkin 的比例
+  sleuth:
+    sampler:
+      # 发送到 zipkin 的比例为0-1，1为100%
+      probability: 1
+
 eureka:
   client:
     service-url:
