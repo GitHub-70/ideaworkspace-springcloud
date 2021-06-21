@@ -33,4 +33,13 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-1:2001/eureka, http://eureka-2:2002/eureka
+  instance:
+    # 心跳超时时间15s，默认90s。从client端最后一次发出心跳后，
+    # 达到这个时间没有再次发出心跳，表示服务不可用，将它的实例从注册中心移除
+    lease-expiration-duration-in-seconds: 15
+    # 心跳间隔6s，默认30s。每一个服务配置后，心跳间隔和心跳超时时间会被保存在server端，
+    # 不同服务的心跳频率可能不同，server端会根据保存每个实例的配置来分别探活
+    lease-renewal-interval-in-seconds: 6
+    # 为true，以IP地址注册到服务中心，相互注册使用IP地址，访问注册中心页面DS Replicas模块中有一个实例为localhost。
+#    prefer-ip-address: true
 

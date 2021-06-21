@@ -7,10 +7,12 @@ server:
 
 eureka:
   server:
-    enable-self-preservation: false # 关闭自我保护模式  AP原则
+    enable-self-preservation: false # 关闭自我保护模式,默认是开启  AP原则
     # eureka 的自我保护状态：心跳失败的比例，在15分钟内是否低于85%,如果出现了低于的情况，
     # Eureka Server会将当前的实例注册信息保护起来，同时提示一个警告，一旦进入保护模式，
     # Eureka Server将会尝试保护其服务注册表中的信息，不再删除服务注册表中的数据。也就是不会注销任何微服务
+    # #设置保护机制的阈值，默认是0.85
+    renewal-percent-threshold: 0.8
 #  instance:
 #    hostname: eureka-1 # 不同主机名
 #  client:
@@ -32,6 +34,13 @@ eureka:
   instance:
     # 主机名
     hostname: eureka-1
+    # 心跳超时时间10s，默认90s。从client端最后一次发出心跳后，
+    # 达到这个时间没有再次发出心跳，表示服务不可用，将它的实例从注册中心移除
+    lease-expiration-duration-in-seconds: 10
+    # 心跳间隔3s，默认30s。每一个服务配置后，心跳间隔和心跳超时时间会被保存在server端，
+    # 不同服务的心跳频率可能不同，server端会根据保存每个实例的配置来分别探活
+    lease-renewal-interval-in-seconds: 3
+
   client:
     service-url:
       defaultZone: http://eureka-2:2002/eureka
@@ -47,6 +56,13 @@ server:
 eureka:
   instance:
     hostname: eureka-2
+    # 心跳超时时间10s，默认90s。从client端最后一次发出心跳后，
+    # 达到这个时间没有再次发出心跳，表示服务不可用，将它的实例从注册中心移除
+    lease-expiration-duration-in-seconds: 10
+    # 心跳间隔4s，默认30s。每一个服务配置后，心跳间隔和心跳超时时间会被保存在server端，
+    # 不同服务的心跳频率可能不同，server端会根据保存每个实例的配置来分别探活
+    lease-renewal-interval-in-seconds: 4
+
   client:
     service-url:
       defaultZone: http://eureka-1:2001/eureka
